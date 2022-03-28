@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 18:05:52 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/02/13 13:08:05 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:30:04 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int				main(int argc, char *argv[])
 	cub3d_parse_map(map, hero);
 	set_player_status(hero, map);
 	do_save(map, hero, save);
-	application_add_key_control(KEYRELEASE, &key_released_handler, &addr);
-	application_add_key_control(KEYPRESS, &key_pressed_handler, &addr);
+	application_add_key_control(KEYRELEASE, KEYRELEASEMASK, &key_released_handler, &addr);
+	application_add_key_control(KEYPRESS, KEYPRESSMASK, &key_pressed_handler, &addr);
 	application_add_exit_control(DESTROYNOTIFY, &quit);
 	application_update(&update, &addr);
 	run_application();

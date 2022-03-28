@@ -6,7 +6,7 @@
 #    By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 08:17:15 by ldutriez          #+#    #+#              #
-#    Updated: 2020/02/12 17:26:27 by ldutriez         ###   ########.fr        #
+#    Updated: 2022/03/26 00:59:09 by ldutriez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC_DIR = 	$(shell find srcs -type d)
 INC_DIR = 	$(shell find includes -type d) \
 			$(shell find libs/libft/includes -type d) \
 			$(shell find libs/graphical_lib/includes -type d)
+			
 LIB_DIR =	libs/libft libs/graphical_lib
 OBJ_DIR = 	obj
 
@@ -63,22 +64,46 @@ FRAMEWORK = OpenGL AppKit
 #Compilation flag
 CFLAGS = -Wall -Wextra -Werror #-O3 -fsanitize=address -g3
 
-IFLAGS = $(foreach dir, $(INC_DIR), -I$(dir)) -I libs/graphical_lib/lib/mlx
+OS = $(shell uname)
+ifeq ($(OS), Linux)
+LIB_DIR += libs/graphical_lib/libs/minilibx-linux
+else
+LIB_DIR += libs/graphical_lib/libs/minilibx-mac
+endif
 
+ifeq ($(OS), Linux)
+IFLAGS = $(foreach dir, $(INC_DIR), -I$(dir)) -I libs/graphical_lib/libs/minilibx-linux
+else
+IFLAGS = $(foreach dir, $(INC_DIR), -I$(dir)) -I libs/graphical_lib/libs/minilibx-mac
+endif
+# IFLAGS = $(foreach dir, $(INC_DIR), -I$(dir)) -I libs/graphical_lib/lib/mlx
+
+ifeq ($(OS), Linux)
+MLX_DIR = libs/graphical_lib/libs/minilibx-linux
+else
+MLX_DIR = libs/graphical_lib/libs/minilibx-mac
+endif
+
+ifeq ($(OS), Linux)
+LFLAGS =	$(foreach dir, $(LIB_DIR), -L $(dir)) \
+			$(foreach lib, $(LIB), -l $(lib)) \
+			-lmlx -lXext -lX11 -lm
+else
 LFLAGS =	$(foreach dir, $(LIB_DIR), -L $(dir)) \
 			$(foreach lib, $(LIB), -l $(lib)) \
 			$(foreach frame, $(FRAMEWORK), -framework  $(frame))
+endif
 
 # Colors
 
-_GREY=	$'\x1b[30m
-_RED=	$'\x1b[31m
-_GREEN=	$'\x1b[32m
-_YELLOW=$'\x1b[33m
-_BLUE=	$'\x1b[34m
-_PURPLE=$'\x1b[35m
-_CYAN=	$'\x1b[36m
-_WHITE=	$'\x1b[37m
+_GREY=	$'\033[30m
+_RED=	$'\033[31m
+_GREEN=	$'\033[32m
+_YELLOW=$'\033[33m
+_BLUE=	$'\033[34m
+_PURPLE=$'\033[35m
+_CYAN=	$'\033[36m
+_WHITE=	$'\033[37m
 
 all:			$(NAME)
 
@@ -93,6 +118,7 @@ show:
 				@echo "$(_BLUE)INC_DIR :\n$(_YELLOW)$(INC_DIR)$(_WHITE)"
 
 install:
+				$(foreach dir, $(LIB_DIR), echo "\n$(_BLUE)___$(dir) Setting___\n$(_WHITE)" ; )
 				$(foreach dir, $(LIB_DIR), make -C $(dir) ; )
 
 re-install:
@@ -107,14 +133,14 @@ $(OBJ_DIR)/%.o : %.c
 
 $(NAME): 		$(INC_DIR) $(NORMAL_OBJ) Makefile
 				@echo "-----\nCreating Executable $(_YELLOW)$@$(_WHITE) ... \c"
-				@$(CC) $(CFLAGS) $(LFLAGS) $(NORMAL_OBJ) -o $(NAME)
+				@$(CC) $(CFLAGS) $(NORMAL_OBJ) libs/graphical_lib/libLGL.a $(MLX_DIR)/libmlx.a libs/libft/libft.a -o $(NAME) $(LFLAGS) -lpthread
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
 bonus:			$(BONUS_NAME)
 
 $(BONUS_NAME):	$(INC_DIR) $(BONUS_OBJ) Makefile
 				@echo "-----\nCreating Executable $(_YELLOW)$@$(_WHITE) ... \c"
-				@$(CC) $(CFLAGS) $(LFLAGS) $(BONUS_OBJ) -o $(BONUS_NAME)
+				@$(CC) $(CFLAGS) $(BONUS_OBJ) libs/graphical_lib/libLGL.a $(MLX_DIR)/libmlx.a libs/libft/libft.a -o $(BONUS_NAME) $(LFLAGS) -lpthread
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
 norme:

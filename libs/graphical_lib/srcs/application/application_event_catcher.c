@@ -6,16 +6,16 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 13:03:28 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/01/23 17:31:32 by tguilbar         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:23:26 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lgl.h"
 
-void			application_add_key_control(
-					int event, int (*funct)(int, void *), void *param)
+void			application_add_key_control(int event, int mask_event,
+					int (*funct)(int, void *), void *param)
 {
-	mlx_hook(g_application->win_ptr, event, 0L, funct, param);
+	mlx_hook(g_application->win_ptr, event, mask_event, funct, param);
 }
 
 void			application_add_mouse_control(

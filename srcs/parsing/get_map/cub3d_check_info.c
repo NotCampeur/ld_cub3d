@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 11:40:44 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/01/30 16:49:42 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/03/25 23:34:31 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int			check_ret(int *ret)
 
 int			check_map(t_map map)
 {
-	if (map.resolution.x == 0 || map.resolution.y == 0 || map.north.path == '\0'
-		|| map.south.path == '\0' || map.west.path == '\0' ||
-		map.est.path == '\0' || map.sprite.path == '\0')
+	if (map.resolution.x == 0 || map.resolution.y == 0 || map.north.path == NULL
+		|| map.south.path == NULL || map.west.path == NULL ||
+		map.est.path == NULL || map.sprite.path == NULL)
 	{
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:28:54 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/01/29 14:52:06 by tguilbar         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:51:06 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	put_image(int num[4], t_map map, t_image **img, float time)
 			if (img[(int)time]->pixels[num[3] + 2] != 0 ||
 				img[(int)time]->pixels[num[3] + 1] != 0 ||
 				img[(int)time]->pixels[num[3]] != 0)
-				put_pixel(
+				set_pixel(
 					create_vector2(num[0] + map.resolution.x * 0.6,
 					num[1] + map.resolution.y * 0.55),
 					create_color(img[(int)time]->pixels[num[3] + 2],

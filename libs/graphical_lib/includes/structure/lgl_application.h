@@ -6,7 +6,7 @@
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 13:28:14 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/01/23 01:05:53 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:28:14 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void			put_pixel(t_vector2 pos, t_color color);
 void			set_pixel(t_vector2 pos, t_color color);
 
 void			render_screen();
-void			application_add_key_control(
-					int event, int (*funct)(int, void *), void *param);
+void			application_add_key_control(int event, int event_mask,
+					int (*funct)(int, void *), void *param);
 void			application_add_mouse_control(
 					int event, int (*funct)(int, void *), void *param);
 void			application_add_exit_control(

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguilbar <tguilbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 15:19:57 by tguilbar          #+#    #+#             */
-/*   Updated: 2020/01/30 17:36:18 by ldutriez         ###   ########.fr       */
+/*   Updated: 2022/03/25 23:33:45 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static int	write_bmp_header(int fd, int filesize)
 
 static int	get_color(int x, int y)
 {
-	int	rgb;
+	// int	rgb;
 	int	color;
 
 	color = *(int*)(g_application->pixels + (4 * (int)g_application->size.x *
 				((int)g_application->size.y - 1 - y)) + (4 * x));
-	rgb = (color & 0xFF0000) | (color & 0x00FF00) | (color & 0x0000FF);
+	// rgb = (color & 0xFF0000) | (color & 0x00FF00) | (color & 0x0000FF);
 	return (color);
 }
 

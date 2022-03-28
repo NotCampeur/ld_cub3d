@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldutriez <ldutriez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/12 13:39:20 by ldutriez          #+#    #+#             */
-/*   Updated: 2020/01/13 14:30:00 by ldutriez         ###   ########.fr       */
+/*   Created: 2021/03/28 13:39:20 by gozsertt          #+#    #+#             */
+/*   Updated: 2022/03/26 01:32:57 by ldutriez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LGL_DEFINE_H
-# define LGL_DEFINE_H
+#ifndef CUB3D_MLX_DEFINE_H
+# define CUB3D_MLX_DEFINE_H
 
 /*
 ** # define NOEVENTMASK 0L
@@ -42,6 +42,14 @@
 ** # define OWNERGRABBUTTONMASK (1L<<24)
 */
 
+enum	e_linux_event_mask
+{
+	KEYPRESSMASK = (1L << 0),
+	KEYRELEASEMASK = (1L << 1),
+	POINTERMOTIONMASK = (1L << 6),
+	DESTROYNOTIFYMASK = (1L << 17),
+};
+
 # define KEYPRESS 2
 # define KEYRELEASE 3
 # define BUTTONPRESS 4
@@ -65,6 +73,7 @@
 # define CONFIGURENOTIFY 22
 # define CONFIGUREREQUEST 23
 # define GRAVITYNOTIFY 24
+# define DESTROYCROSSNOTIFY 33
 
 /*
 ** Mouse button keycodes
@@ -86,32 +95,32 @@
 ** Letters keys
 */
 
-# define A_KEY 0
-# define B_KEY 11
-# define C_KEY 8
-# define D_KEY 2
-# define E_KEY 14
-# define F_KEY 3
-# define G_KEY 5
-# define H_KEY 4
-# define I_KEY 34
-# define J_KEY 38
-# define K_KEY 40
-# define L_KEY 37
-# define M_KEY 46
-# define N_KEY 45
-# define O_KEY 31
-# define P_KEY 35
-# define Q_KEY 12
-# define R_KEY 15
-# define S_KEY 1
-# define T_KEY 17
-# define U_KEY 32
-# define V_KEY 9
-# define W_KEY 13
-# define X_KEY 7
-# define Y_KEY 16
-# define Z_KEY 6
+# define A_KEY 97
+# define B_KEY 98
+# define C_KEY 99
+# define D_KEY 100
+# define E_KEY 101
+# define F_KEY 102
+# define G_KEY 103
+# define H_KEY 102
+# define I_KEY 105
+# define J_KEY 106
+# define K_KEY 107
+# define L_KEY 108
+# define M_KEY 109
+# define N_KEY 110
+# define O_KEY 111
+# define P_KEY 112
+# define Q_KEY 113
+# define R_KEY 114
+# define S_KEY 115
+# define T_KEY 116
+# define U_KEY 117
+# define V_KEY 118
+# define W_KEY 119
+# define X_KEY 120
+# define Y_KEY 121
+# define Z_KEY 122
 
 /*
 ** Numbers (not numeric keypad ones)
@@ -172,7 +181,7 @@
 # define F8_KEY 100
 # define F9_KEY 101
 # define F10_KEY 109
-# define F11_KEY
+# define F11_KEY 110
 # define F12_KEY 111
 # define F13_KEY 105
 # define F14_KEY 107
@@ -188,8 +197,8 @@
 
 # define UP_KEY 126
 # define DOWN_KEY 125
-# define RIGHT_KEY 124
-# define LEFT_KEY 123
+# define RIGHT_KEY 65363
+# define LEFT_KEY 65361
 
 /*
 ** Special keys
@@ -205,20 +214,20 @@
 ** CLR_KEY is the clear key
 */
 
-# define ESC_KEY 53
+# define ESC_KEY 65307
 # define TAB_KEY 48
 # define CL_KEY 272
-# define LSFT_KEY 257
-# define LCTRL_KEY 256
+# define LSFT_KEY 65505
+# define RSFT_KEY 65506
+# define LCTRL_KEY 65507
 # define LOPT_KEY 261
 # define LCMD_KEY 259
 # define LDEL_KEY 51
-# define RTN_KEY 36
-# define RSFT_KEY 258
+# define RTN_KEY 65293
 # define RCTRL_KEY 269
 # define ROPT_KEY 262
 # define RCMD_KEY 260
-# define EJ_KEY
+# define EJ_KEY 65307
 # define FN_KEY 279
 # define RDEL_KEY 117
 # define HOME_KEY 115
@@ -257,12 +266,22 @@
 # define NKNTR_KEY 76
 
 /*
-** # define UCHAR unsigned char
+** define UCHAR unsigned char
 */
 
 # define RED_COMP 2
 # define GREEN_COMP 1
 # define BLUE_COMP 0
 # define ALPHA_COMP 3
+
+/*
+** Color Mask for extracting from int to color
+** hex representation of ARGB
+*/
+
+# define ALPHA_MASK	0xFF000000
+# define RED_MASK	0x00FF0000
+# define GREEN_MASK	0x0000FF00
+# define BLUE_MASK	0x000000FF
 
 #endif
